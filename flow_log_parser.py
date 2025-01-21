@@ -56,7 +56,7 @@ def load_dstport_protocol_flow_logs(flow_logs_file_name: str):
         with open(flow_logs_file_name, mode='r', encoding="utf-8") as f:
             for line in f:
                 fields = line.split()
-                if len(fields) >= 8:  # Ensure we have enough fields to access dstport and protocol
+                if len(fields) >= 8:
                     dstport = fields[6]
                     protocol = fields[7]
                     dstport_proto.append((dstport, protocol))
@@ -75,11 +75,11 @@ def map_port_proto_tag(lookup: dict, dstport_proto: list):
         a dictionary with the tag and its count
     """
     tag_count_dict = {}
-    for key in dstport_proto:        
+    for key in dstport_proto:
         if key in lookup:
             tag = lookup[key]
         else:
-            tag = "untagged"        
+            tag = "untagged"
         if tag not in tag_count_dict:
             tag_count_dict[tag] = 0
         tag_count_dict[tag] += 1
@@ -151,17 +151,9 @@ def main():
     args = parse_args()
     try:
         lookup_dict = load_lookup_table(args.lookup_file)
-        # print("Lookup Table Loaded:", lookup_dict)
-
         flow_logs = load_dstport_protocol_flow_logs(args.flow_log_file)
-        # print("Flow Logs Loaded:", flow_logs)
-
         tag_mapping = map_port_proto_tag(lookup_dict, flow_logs)
-        # print("Tag Mapping:", tag_mapping)
-
         port_proto_count = get_port_protocol_counts(flow_logs)
-        # print("Port/Protocol Count:", port_proto_count)
-
         write_output_file(args.output, tag_mapping, port_proto_count)
 
     except FileNotFoundError as fnf_error:
