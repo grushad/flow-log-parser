@@ -29,6 +29,6 @@ Assumptions:
 
 
 References:
-https://www.iana.org/assignments/protocol-numbers/protocol-numbers-1.csv
-https://docs.python.org/3/library/socket.html
-https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html#flow-logs-fields
+- https://www.iana.org/assignments/protocol-numbers/protocol-numbers-1.csv
+- https://docs.python.org/3/library/socket.html
+- https://docs.aws.amazon.com/vpc/latest/userguide/flow-log-records.html#flow-logs-fields
